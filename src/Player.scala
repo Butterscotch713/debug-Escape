@@ -1,9 +1,9 @@
 
 
-
 abstract class Player {
-  var mood=""
+  var mood="Content"
   var health=100
+
 
   def moodUpdate(NewMood:String): Unit
 
