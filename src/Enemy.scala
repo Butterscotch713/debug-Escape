@@ -6,7 +6,8 @@ class Enemy{
   def healthUpdate(damage:Int): Unit ={
     Player.health=Player.health-damage
     if(Player.health<=0){
-      println("You Died")
+      println("You died, but you wake up to a familiar sight")
+      Main.location="awoke"
     }
 
   }
