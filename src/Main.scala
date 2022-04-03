@@ -3,7 +3,7 @@ import scala.io.StdIn.readLine
 
 object Main{
   var name=""
-  var location=""
+  var location="awoken"
   var decision=""
   var restspots=List("diner")
 
@@ -53,7 +53,7 @@ object Main{
       decision=""
     }
     else{
-      println(s"Oh, alright, is there somewhere you would like to go?")
+      println(s"Oh, alright, there's a few other spots I can take you.")
       Thread.sleep(1000)
       println(s"There's a lake, forest, beach, and mountain nearby.")
       Thread.sleep(2000)
@@ -68,7 +68,8 @@ object Main{
         location=readLine().toLowerCase
         while (location!="lake"&&location!="forest"&&location!="mountain"&&location!="beach"){
           println("please type lake, mountain, beach, or forest")
-          decision=readLine()
+          decision=readLine().toLowerCase
+          location=decision
         }
         location=location+"1"
         decision=""
@@ -76,7 +77,7 @@ object Main{
       else{
         println("I'm afraid I can't stay then, good luck on your adventure.")
         Thread.sleep(2000)
-        println(s"be safe, do not be out after dark.")
+        println(s"Be safe, do not be out after dark.")
         location="alone"
         decision=""
       }
@@ -157,10 +158,10 @@ object Main{
       Thread.sleep(2000)
       println("What's that? Where do you go?")
       Thread.sleep(3000)
-      println("Hmmmm. Well I wouldn't recommend staying here. You could try to barter with the innkeeper in town, or theres a hut in the forest.")
+      println("Hmmmm. Well I wouldn't recommend staying here. You could try to barter with the innkeeper in town, or there's a hut in the forest.")
       Thread.sleep(2000)
       println("Will it be the inn or hut?")
-      location=readLine()
+      location=readLine().toLowerCase
       println("Good luck. I will meet you at the diner in town tomorrow.")
       Thread.sleep(2000)
       println("One last thing. Don't go out after dark.")
@@ -206,7 +207,7 @@ object Main{
       println("Unfortunately, no, you cannot come home with me.")
       Thread.sleep(2000)
       println("Which will it be? The inn or the hut?")
-      location=readLine()
+      location=readLine().toLowerCase
       println("Good luck. We will meet in the diner in town tomorrow morning.")
       Thread.sleep(2000)
       println("One last thing..")
@@ -220,8 +221,82 @@ object Main{
   }
 
 
+  /** beach location */
+    def beach():Unit={
+      if(location=="beach1"){
+        println("Really? The beach? Fine.")
+        Thread.sleep(2000)
+        println("Sorry, just never really liked the beach. Sand always gets everywhere.")
+        Thread.sleep(2000)
+        println("Luckily the beach is really close, its just hidden by the trees.")
+        Thread.sleep(2000)
+        println("See? We're here. It's a beach, I'm not sure what you expected.")
+        Thread.sleep(2000)
+        println(Console.YELLOW+"*The salty mist stings your eyes*")
+        moodUpdate("Annoyed")
+        healthDamage(1)
+        println(Console.RED+ s"Mood: ${Player.mood}, Health:${Player.health}")
+        Thread.sleep(2000)
+        println(Console.RESET+"See, just being here sucks. The water is always too cold to swim in, there are sharp shells everywhere, the salty air burns.")
+        Thread.sleep(2000)
+        println("I'm heading home, I suggest you find somewhere to stay before it gets dark.")
+        Thread.sleep(2000)
+        println("Where can you go? There's an inn in town but you have no money, you could try to barter with the innkeeper.")
+        println("Otherwise there's a small hut just inside the forest")
+        Thread.sleep(2000)
+        println("No, you cannot stay with me.")
+        Thread.sleep(2000)
+        println("Which will it be? Inn or hut?")
+        location=readLine().toLowerCase
+        println("Good luck. I will be waiting for you tomorrow morning at the diner in town.")
+        Thread.sleep(2000)
+        println("and whatever you do..")
+        Thread.sleep(2000)
+        println("under no circumstances should you go outside once night falls.")
+        moodUpdate("Worried")
+        println(s"Mood: ${Player.mood}, Health:${Player.health}")
+      }
+    }
+
+/** Mountain Location */
+  def mountain():Unit={
+    if(location=="mountain1"){
+      println("You want to go to the mountain? Alright, but we don't have time to climb it today.")
+      Thread.sleep(2000)
+      println("If you talk to some of the townsfolk, they'll tell you this mountain used to be an active volcano.")
+      Thread.sleep(2000)
+      println("But they don't know what they're talking about.")
+      Thread.sleep(2000)
+      println("Make sure you don't leave the path, there are hidden holes everywhere.")
+      Thread.sleep(3000)
+      println("You're keeping up well, you must've had some hiking experience.")
+      Thread.sleep(2000)
+      println("We'll stop here for a bit.")
+      Thread.sleep(2000)
+      println("It's strange, you seem familiar. But I know everyone within a few miles of our town.")
+      Thread.sleep(2000)
+      println("Oh well. We need to head back down so we have time before it gets dark.")
+      Thread.sleep(2000)
+      println(Console.YELLOW+"*You fall suddenly and hear a snap*")
+      moodUpdate("Pain")
+      healthDamage(25)
+      Thread.sleep(2000)
+      println(Console.RED+s"Mood: ${Player.mood}, Health:${Player.health}")
+      Thread.sleep(2000)
+      println(Console.RESET + "Oh F-, are you okay?")
+      Thread.sleep(2000)
+      println(Console.YELLOW+"*Your ankle definitely shouldn't bend that way*")
+      Thread.sleep(2000)
+      println(Console.RESET + "I'm gonna take your grimace as a no.")
+      Thread.sleep(2000)
+      println("I'll carry you to the inn, unfortunately I cannot take you to my house.")
+      Thread.sleep(2000)
+      println("We'll have to hurry, its getting dark")
+      location="InnHurt"
+    }
 
 
+  }
 
   def main(args:Array[String]):Unit={
     println("Welcome to 'Escape'")
@@ -247,6 +322,12 @@ object Main{
       }
       if(location.toLowerCase.contains("forest")){
         forest()
+      }
+      if(location.toLowerCase.contains("beach")){
+        beach()
+      }
+      if (location.toLowerCase.contains("mountain")){
+        mountain()
       }
 
       location="home" /** PREVENTS INFINITE LOOP RN, REMOVE AT END */
