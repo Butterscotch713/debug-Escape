@@ -1,14 +1,12 @@
 
 
-abstract class Player {
+abstract class Player (val name:String,mood:String,health:Int){
+
+
+
+}
+object Player{
   var mood="Content"
   var health=100
-
-
-  def moodUpdate(NewMood:String): Unit
-
-  def healthUpdate(HP:Int): Unit
-
-
 
 }

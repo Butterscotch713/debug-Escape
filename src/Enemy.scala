@@ -1,14 +1,14 @@
 
 
 
-class Enemy extends Player{
-  override def moodUpdate(NewMood:String): Unit = {
-    mood=NewMood
+class Enemy{
+  def moodUpdate(NewMood:String): Unit = {
+    Player.mood=NewMood
   }
 
-  override def healthUpdate(damage:Int): Unit ={
-    health=health-damage
-    if(health<=0){
+  def healthUpdate(damage:Int): Unit ={
+    Player.health=Player.health-damage
+    if(Player.health<=0){
       println("You Died")
     }
 

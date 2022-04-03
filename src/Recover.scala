@@ -1,12 +1,12 @@
-class Recover extends Player {
-  override def moodUpdate(NewMood: String): Unit ={
-    mood=NewMood
+class Recover {
+  def moodUpdate(NewMood: String): Unit ={
+    Player.mood=NewMood
   }
 
-  override def healthUpdate(Regain: Int): Unit = {
-    health+=Regain
-    if(health>100){
-      health=100
+  def healthUpdate(Regain: Int): Unit = {
+    Player.health+=Regain
+    if(Player.health>100){
+      Player.health=100
     }
   }
 }
