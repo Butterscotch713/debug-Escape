@@ -89,7 +89,8 @@ object Main{
   /** town location */
   def town():Unit={
     if(location=="town1") {
-      println("Let's go to the diner and find out why you're here.")
+      Thread.sleep(2000)
+      println("We'll head to the diner and find out why you're here.")
       Thread.sleep(2000)
       println("I found you just a couple minutes before you awoke.")
       Thread.sleep(2000)
@@ -120,6 +121,21 @@ object Main{
       println("Good luck. And whatever you do, don't go out after dark. I will meet you here tomorrow morning.")
       moodUpdate("Worried")
       println(Console.RED+s"Mood: ${Player.mood}, Health:${Player.health}")
+    }
+    if(location=="town2"){
+      println(Console.RESET+"Hello, you look like you got some sleep.")
+      Thread.sleep(2000)
+      println("I did some digging last night, and I fear we're running out of time if there's any hope of you returning home.")
+      Thread.sleep(3000)
+      moodUpdate("Hungry")
+      println(Console.RED+s"Mood: ${Player.mood}, Health:${Player.health}")
+      Thread.sleep(2000)
+      println(Console.RESET+"What's that? You're hungry? I'll go order some us some breakfast.")
+      Thread.sleep(3000)
+      println("We should have our food in a few minutes.")
+      Thread.sleep(2000)
+      println("While we wait, try closing your eyes and saying 'There's no place like home' 3 times")
+      location="home"
     }
 
   }
@@ -198,13 +214,14 @@ object Main{
       Thread.sleep(2000)
       println("Alas, life goes on.")
       Thread.sleep(2000)
-      println("Sorry, I started rambling again.")
+      println(Console.YELLOW+"*You both start walking to the edge of the forest.*")
+      println(Console.RESET+"Sorry, I started rambling again.")
       Thread.sleep(2000)
       println("Darn, it's getting dark. I need to get home.")
       Thread.sleep(2000)
       println("What? Where do you go?")
       Thread.sleep(3000)
-      println("Well, I guess you could come back with me and barter with the innkeeper in town, or you could stay in this hut tonight.")
+      println("Well, I guess you could come back with me and barter with the innkeeper in town, or you could stay that hut tonight.")
       Thread.sleep(2000)
       println("Unfortunately, no, you cannot come home with me.")
       Thread.sleep(2000)
@@ -376,6 +393,7 @@ object Main{
           }
         }
       else if (location=="InnHurt"){
+        Thread.sleep(2000)
         println(Console.RESET+"We made it")
         Thread.sleep(2000)
         println("I'm going to set you here for a minute while I talk to the innkeeper.")
@@ -395,18 +413,79 @@ object Main{
         Thread.sleep(2000)
         println(Console.RED + s"Mood: ${Player.mood}, Health:${Player.health}")
         println(Console.YELLOW+"You wake up, noticing any injuries you had are healed.*")
+        Thread.sleep(2000)
+        println("*You realize you heard some strange noises outside last night,and make a note to ask your friend about them.*")
+        println("*You look a the time and hurry to meet your new friend at the diner.*")
+        location="town2"
+      }
+    }
 
+/**Hut Location */
+  def hut():Unit={
+    if(location=="hut1"){
+      println(Console.YELLOW+"*You hurry to the forest, searching for some form of structure.*")
+      Thread.sleep(2000)
+      println("*After a few minutes, you see the outline of a small building.*")
+      Thread.sleep(2000)
+      println("*With your new friend's words echoing in you head, and the sun setting, you sprint to the door.*")
+      Thread.sleep(2000)
+      println("*You make it inside, and notice a chair, table, and small bed inside.*")
+      Thread.sleep(2000)
+      moodUpdate("Hungry")
+      println(Console.RED + s"Mood: ${Player.mood}, Health:${Player.health}")
+      Thread.sleep(2000)
+      println(Console.YELLOW+"You realize you haven't eaten all day, and see some berry bushes outside.*")
+      Thread.sleep(2000)
+      println("*They look like raspberries you think to yourself*.")
+      Thread.sleep(2000)
+      println("*It's pitch black outside, do you risk it?*")
+      decision=readLine().toLowerCase
+      if(decision.contains("yes")){
+        println("*You hurry outside and start rapidly picking berries.*")
+        Thread.sleep(2000)
+        println("*In your hurry, you didn't notice the door close behind you.*")
+        Thread.sleep(2000)
+        println("*You try to open the door, but it seems to weigh thousands of pounds.*")
+        Thread.sleep(2000)
+        println("*After a few more minutes of trying, you give up and start to head to the inn.*")
+        Thread.sleep(2000)
+        println("*You notice you seem to be walking for a while with still no end of the forest in sight.*")
+        Thread.sleep(2000)
+        moodUpdate("Panicked")
+        println(Console.RED + s"Mood: ${Player.mood}, Health:${Player.health}")
+        Thread.sleep(2000)
+        println(Console.YELLOW+"*You begin to run, but the forest just seems to extend further and further with each step you take.*")
+        Thread.sleep(2000)
+        println("*After what feels like hours, you collapse, exhausted.*")
+        Thread.sleep(2000)
+        println("*As you fall to the ground, your friend's warning is your last thought.*")
+        location="awoke"
+      }
+      else{
+        println("*Trusting what your new friend told you, you decide you can wait till morning to eat.*")
+        Thread.sleep(2000)
+        println("*You head over to the bed and fall asleep almost immediately, but hear some scratching outside as you fall asleep.*")
+        Thread.sleep(2000)
+        moodUpdate("Refreshed")
+        healthUpdate(100)
+        Thread.sleep(2000)
+        println(Console.RED + s"Mood: ${Player.mood}, Health:${Player.health}")
+        println(Console.YELLOW+"You wake up, noticing any injuries you had are healed.*")
+        Thread.sleep(2000)
+        println("*You look a the time and hurry to meet your new friend at the diner.*")
+        location="town2"
       }
     }
 
 
+  }
 
   def main(args:Array[String]):Unit={
     println("Welcome to 'Escape'")
     Thread.sleep(2000)
     println("This is a simple text adventure game. You will type in your choices")
     Thread.sleep(2000)
-    println("Your guide will appear with white text in the console.")
+    println("Characters speaking to you will appear with white text in the console.")
     Thread.sleep(2000)
     println(Console.YELLOW + "Events will appear in yellow and with '*' on both sides.")
     Thread.sleep(2000)
@@ -436,15 +515,15 @@ object Main{
       }
       else if (location.toLowerCase.contains("inn")){
         Inn()
-
+      }
+      else if(location.toLowerCase.contains("hut")){
+        hut()
       }
 
-
-
-      /** PREVENTS INFINITE LOOP RN, REMOVE AT END */
-
     }
-
+    println(Console.YELLOW+"*You wake up in your normal bed, all past memories restored. You're amazed that worked*")
+    Thread.sleep(2000)
+    println(Console.MAGENTA+"Thanks for playing, more coming soon!")
 
   }
 }
