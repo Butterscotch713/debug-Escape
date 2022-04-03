@@ -39,9 +39,9 @@ object Main{
     }
     println(s"Nice to meet you $name!")
     Thread.sleep(1000)
-    println(s"Welcome to our world. I'll be here to help you get around.")
+    println(s"Welcome to our world. I can help you get around.")
     Thread.sleep(1000)
-    println(s"We're just outside of the town, would you like to check it out?")
+    println(s"Say, we're just outside of the town, would you like to check it out?")
     decision=readLine().toLowerCase
     while (decision!="yes"&&decision!="no"){
         println("please type yes or no")
@@ -123,6 +123,7 @@ object Main{
 
   }
 
+  /**lake location */
   def lake():Unit={
     if(location.toLowerCase=="lake1"){
       println("You want to go to the lake? Okay! We'll head there now.")
@@ -283,7 +284,7 @@ object Main{
       Thread.sleep(2000)
       println(Console.RED+s"Mood: ${Player.mood}, Health:${Player.health}")
       Thread.sleep(2000)
-      println(Console.RESET + "Oh F-, are you okay?")
+      println(Console.RESET + "Oh f-, are you okay?")
       Thread.sleep(2000)
       println(Console.YELLOW+"*Your ankle definitely shouldn't bend that way*")
       Thread.sleep(2000)
@@ -317,16 +318,16 @@ object Main{
       if (location.toLowerCase.contains("town")) {
         town()
       }
-      if(location.toLowerCase.contains("lake")){
+      else if(location.toLowerCase.contains("lake")){
         lake()
       }
-      if(location.toLowerCase.contains("forest")){
+      else if(location.toLowerCase.contains("forest")){
         forest()
       }
-      if(location.toLowerCase.contains("beach")){
+      else if(location.toLowerCase.contains("beach")){
         beach()
       }
-      if (location.toLowerCase.contains("mountain")){
+      else if (location.toLowerCase.contains("mountain")){
         mountain()
       }
 
