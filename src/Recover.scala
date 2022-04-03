@@ -1,4 +1,5 @@
-class Recover {
+
+class Recover{
   def moodUpdate(NewMood: String): Unit ={
     Player.mood=NewMood
   }

@@ -6,7 +6,7 @@ abstract class Player (val name:String,mood:String,health:Int){
 
 }
 object Player{
-  var mood="Content"
+  var mood="Groggy"
   var health=100
 
 }
